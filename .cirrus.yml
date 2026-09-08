@@ -1,0 +1,34 @@
+timeout_in: 120m
+
+container:
+  image: ubuntu:24.04
+  cpu: 8
+  memory: 32G
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+
+environment_task:
+  name: Check build environment
+
+  setup_script:
+    - apt-get update
+    - apt-get install -y git curl python3 ca-certificates lsb-release
+
+  info_script:
+    - echo "=== CPU ==="
+    - nproc
+    - lscpu
+
+    - echo "=== RAM ==="
+    - free -h
+
+    - echo "=== DISK ==="
+    - df -h
+
+    - echo "=== ARCH ==="
+    - uname -m
+    - dpkg --print-architecture
+
+    - echo "=== OS ==="
+    - cat /etc/os-release

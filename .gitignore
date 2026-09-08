@@ -1,0 +1,6 @@
+out/
+.repo/
+ccache/
+*.img
+*.zip
+*.log
