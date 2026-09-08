@@ -1,0 +1,47 @@
+version: 2.1
+
+jobs:
+  check-environment:
+    machine:
+      image: ubuntu-2404:current
+    resource_class: xlarge
+
+    steps:
+      - checkout
+
+      - run:
+          name: Check CPU
+          command: |
+            echo "=== CPU ==="
+            nproc
+            lscpu
+
+      - run:
+          name: Check RAM
+          command: |
+            echo "=== RAM ==="
+            free -h
+
+      - run:
+          name: Check disk
+          command: |
+            echo "=== DISK ==="
+            df -h
+            echo
+            echo "=== ROOT ==="
+            sudo du -sh /* 2>/dev/null | sort -h | tail -20 || true
+
+      - run:
+          name: Check system
+          command: |
+            echo "=== SYSTEM ==="
+            uname -a
+            cat /etc/os-release
+            echo
+            echo "Architecture:"
+            uname -m
+
+workflows:
+  test-runner:
+    jobs:
+      - check-environment
