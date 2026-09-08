@@ -14,7 +14,7 @@ Early development / build infrastructure setup.
 
 ## CI
 
-Build experiments are performed using Cirrus CI.
+Build experiments are performed using Cirrus CI. Due to cirrus ci not being available ill use circleci.
 
 ## Warning
 
